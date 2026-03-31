@@ -4,13 +4,21 @@
   "description": "Krosoft shared React Supabase package",
   "type": "module",
   "exports": {
-    "./auth": {
-      "import": "./dist/auth/index.js",
-      "types": "./dist/auth/index.d.ts"
+    "./contexts": {
+      "import": "./dist/contexts/index.js",
+      "types": "./dist/contexts/index.d.ts"
+    },
+    "./providers": {
+      "import": "./dist/providers/index.js",
+      "types": "./dist/providers/index.d.ts"
     },
     "./hooks": {
       "import": "./dist/hooks/index.js",
       "types": "./dist/hooks/index.d.ts"
+    },
+    "./helpers": {
+      "import": "./dist/helpers/index.js",
+      "types": "./dist/helpers/index.d.ts"
     }
   },
   "files": [
@@ -22,6 +30,9 @@
     "type-check": "tsc --noEmit",
     "test": "vitest run"
   },
+  "dependencies": {
+    "jwt-decode": "^4.0.0"
+  },
   "peerDependencies": {
     "react": ">=18.0.0",
     "@supabase/supabase-js": ">=2.0.0",
@@ -30,6 +41,7 @@
   "devDependencies": {
     "@krosoft/tooling-eslint-react": ">=0.0.2",
     "@krosoft/tooling-prettier": ">=0.0.6",
+    "@krosoft/tooling-tsconfig": ">=0.0.6",
     "@krosoft/tooling-tsconfig-react": ">=0.0.5",
     "@supabase/supabase-js": "^2.49.4",
     "@tanstack/react-query": "^5.80.2",
