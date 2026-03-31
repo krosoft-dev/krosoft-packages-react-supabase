@@ -1,0 +1,1 @@
+export { useSupabaseQuery } from "./useSupabaseQuery";

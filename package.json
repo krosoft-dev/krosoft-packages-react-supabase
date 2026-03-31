@@ -1,0 +1,49 @@
+{
+  "name": "@krosoft/react-supabase",
+  "version": "0.0.1",
+  "description": "Krosoft shared React Supabase package",
+  "type": "module",
+  "exports": {
+    "./auth": {
+      "import": "./dist/auth/index.js",
+      "types": "./dist/auth/index.d.ts"
+    },
+    "./hooks": {
+      "import": "./dist/hooks/index.js",
+      "types": "./dist/hooks/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint .",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "@supabase/supabase-js": ">=2.0.0",
+    "@tanstack/react-query": ">=5.0.0"
+  },
+  "devDependencies": {
+    "@krosoft/tooling-eslint-react": ">=0.0.2",
+    "@krosoft/tooling-prettier": ">=0.0.6",
+    "@krosoft/tooling-tsconfig-react": ">=0.0.5",
+    "@supabase/supabase-js": "^2.49.4",
+    "@tanstack/react-query": "^5.80.2",
+    "@types/react": "^18.3.0",
+    "prettier": "^3.8.1",
+    "react": "^18.3.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krosoft-dev/krosoft-packages-react-supabase.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

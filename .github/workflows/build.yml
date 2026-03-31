@@ -1,0 +1,13 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    permissions:
+      id-token: write
+    uses: krosoft-dev/Krosoft.DevOps.GitHub/.github/workflows/npm-build.yml@main
