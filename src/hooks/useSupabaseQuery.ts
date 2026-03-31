@@ -4,11 +4,7 @@ import type { PostgrestError } from "@supabase/supabase-js";
 
 type SupabaseQueryFn<T> = () => Promise<{ data: T | null; error: PostgrestError | null }>;
 
-export const useSupabaseQuery = <T>(
-  queryKey: readonly unknown[],
-  queryFn: SupabaseQueryFn<T>,
-  enabled = true,
-): UseQueryResult<T, Error> => {
+export const useSupabaseQuery = <T>(queryKey: readonly unknown[], queryFn: SupabaseQueryFn<T>, enabled = true): UseQueryResult<T, Error> => {
   return useQuery<T, Error>({
     queryKey,
     queryFn: async () => {
