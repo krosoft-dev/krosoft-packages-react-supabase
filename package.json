@@ -16,6 +16,10 @@
       "import": "./dist/hooks/index.js",
       "types": "./dist/hooks/index.d.ts"
     },
+    "./hooks/behaviors": {
+      "import": "./dist/hooks/behaviors/index.js",
+      "types": "./dist/hooks/behaviors/index.d.ts"
+    },
     "./helpers": {
       "import": "./dist/helpers/index.js",
       "types": "./dist/helpers/index.d.ts"
