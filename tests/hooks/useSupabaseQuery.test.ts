@@ -31,7 +31,7 @@ describe("useSupabaseQuery", () => {
       () =>
         useSupabaseQuery(["test-error"], async () => ({
           data: null,
-          error: { message: "not found", code: "404", details: "", hint: "" },
+          error: { message: "not found", code: "404", details: "", hint: "", name: "PostgrestError" },
         })),
       { wrapper: createWrapper() },
     );
