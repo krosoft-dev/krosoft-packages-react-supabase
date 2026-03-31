@@ -8,8 +8,7 @@ const createWrapper = () => {
   const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false } },
   });
-  return ({ children }: { children: React.ReactNode }) =>
-    createElement(QueryClientProvider, { client: queryClient }, children);
+  return ({ children }: { children: React.ReactNode }) => createElement(QueryClientProvider, { client: queryClient }, children);
 };
 
 describe("useSupabaseQuery", () => {
