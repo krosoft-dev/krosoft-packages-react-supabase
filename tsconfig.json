@@ -1,7 +1,11 @@
 {
   "extends": "@krosoft/tooling-tsconfig-react/lib",
   "compilerOptions": {
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": ["src", "tests"]
 }
