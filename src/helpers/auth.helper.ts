@@ -1,23 +1,8 @@
 import type { Session, User } from "@supabase/supabase-js";
 import { jwtDecode } from "jwt-decode";
-
-export interface CustomUserMetadata {
-  avatar_url?: string;
-  name?: string;
-  roles?: string[];
-  permissions?: string[];
-  tenants?: TenantMetadata[];
-}
-
-export interface JwtPayloadWithMetadata {
-  user_metadata?: CustomUserMetadata;
-}
-
-export interface TenantMetadata {
-  id: string;
-  name: string;
-  logo_url?: string | null;
-}
+import type { CustomUserMetadata } from "../types/CustomUserMetadata";
+import type { JwtPayloadWithMetadata } from "../types/JwtPayloadWithMetadata";
+import type { TenantMetadata } from "../types/TenantMetadata";
 
 export const enrichUserWithMetadata = (user: User, session: Session): User => {
   if (!user || !session) {
@@ -37,9 +22,7 @@ export const enrichUserWithMetadata = (user: User, session: Session): User => {
   };
 };
 
-export const extractUserMetadataFromSession = (
-  session: Session | null,
-): { roles: string[]; permissions: string[]; tenants: TenantMetadata[] } => {
+export const extractUserMetadataFromSession = (session: Session | null): { roles: string[]; permissions: string[]; tenants: TenantMetadata[] } => {
   if (!session?.access_token) {
     return { roles: [], permissions: [], tenants: [] };
   }
