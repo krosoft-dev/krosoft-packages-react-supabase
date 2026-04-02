@@ -21,29 +21,9 @@
     "dist"
   ],
   "exports": {
-    "./contexts": {
-      "import": "./dist/contexts/index.js",
-      "types": "./dist/contexts/index.d.ts"
-    },
-    "./providers": {
-      "import": "./dist/providers/index.js",
-      "types": "./dist/providers/index.d.ts"
-    },
-    "./hooks": {
-      "import": "./dist/hooks/index.js",
-      "types": "./dist/hooks/index.d.ts"
-    },
-    "./hooks/behaviors": {
-      "import": "./dist/hooks/behaviors/index.js",
-      "types": "./dist/hooks/behaviors/index.d.ts"
-    },
-    "./helpers": {
-      "import": "./dist/helpers/index.js",
-      "types": "./dist/helpers/index.d.ts"
-    },
-    "./types": {
-      "import": "./dist/types/index.js",
-      "types": "./dist/types/index.d.ts"
+    "./*": {
+      "import": "./dist/*/index.js",
+      "types": "./dist/*/index.d.ts"
     }
   },
   "peerDependencies": {
