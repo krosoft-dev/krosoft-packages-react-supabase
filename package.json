@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@krosoft/tooling-eslint-react": "^0.0.15",
-    "@krosoft/tooling-prettier": "^0.0.13",
+    "@krosoft/tooling-prettier": "^0.0.14",
     "@krosoft/tooling-tsconfig": "^0.0.7",
     "@krosoft/tooling-tsconfig-react": "^0.0.10",
     "@supabase/supabase-js": "^2.103.0",
