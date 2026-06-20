@@ -35,14 +35,14 @@
     "jwt-decode": "^4.0.0"
   },
   "devDependencies": {
-    "@krosoft/tooling-eslint-react": "^0.0.21",
-    "@krosoft/tooling-prettier": "^0.0.14",
+    "@krosoft/tooling-eslint-react": "^0.0.23",
+    "@krosoft/tooling-prettier": "^0.0.15",
     "@krosoft/tooling-tsconfig": "^0.0.7",
     "@krosoft/tooling-tsconfig-react": "^0.0.10",
     "@supabase/supabase-js": "^2.108.2",
     "@tanstack/react-query": "^5.101.0",
     "@types/react": "^19.2.17",
-    "prettier": "^3.8.3",
+    "prettier": "^3.8.4",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "typescript": "^5.9.3",
