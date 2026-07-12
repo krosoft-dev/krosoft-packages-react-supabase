@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Session, SupabaseClient, User } from "@supabase/supabase-js";
+import type { Provider, Session, SupabaseClient, User } from "@supabase/supabase-js";
 import { useQueryClient } from "@tanstack/react-query";
 import { AuthContext } from "../contexts/auth.context";
 import { enrichUserWithMetadata } from "../helpers/auth.helper";
@@ -107,6 +107,26 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ client, children, na
     }
   };
 
+  const signInWithProvider = async (provider: Provider, redirectTo?: string): Promise<void> => {
+    // La connexion OAuth redirige le navigateur vers le fournisseur : pas de navigate/setUser ici,
+    // c'est onAuthStateChange qui prend le relais au retour de redirection.
+    try {
+      setIsLoading(true);
+      const { error } = await client.auth.signInWithOAuth({
+        provider,
+        options: { redirectTo: redirectTo ?? `${window.location.origin}/` },
+      });
+
+      if (error) {
+        throw error;
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Échec de la connexion";
+      onError?.(message);
+      setIsLoading(false);
+    }
+  };
+
   const signUp = async (email: string, password: string, name: string): Promise<void> => {
     try {
       setIsLoading(true);
@@ -171,6 +191,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ client, children, na
         session,
         isLoading,
         signIn,
+        signInWithProvider,
         signUp,
         signOut,
         getLoginUrl,
