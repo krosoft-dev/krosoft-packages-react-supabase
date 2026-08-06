@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Provider, Session, SupabaseClient, User } from "@supabase/supabase-js";
 import { useQueryClient } from "@tanstack/react-query";
 import { AuthContext } from "../contexts/auth.context";
@@ -18,6 +18,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ client, children, na
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const queryClient = useQueryClient();
+  const currentUserIdRef = useRef<string | null>(null);
 
   const clearAllData = (): void => {
     queryClient.clear();
@@ -44,9 +45,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ client, children, na
         }
 
         if (data.session?.user) {
+          currentUserIdRef.current = data.session.user.id;
           setSession(data.session);
           setUser(enrichUserWithMetadata(data.session.user, data.session));
         } else {
+          currentUserIdRef.current = null;
           setSession(null);
           setUser(null);
         }
@@ -59,9 +62,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ client, children, na
     };
 
     const { data: listener } = client.auth.onAuthStateChange((_event, newSession) => {
-      if (_event !== "INITIAL_SESSION") {
+      const nextUserId = newSession?.user.id ?? null;
+
+      // Seul un changement d'utilisateur — connexion, déconnexion, bascule de compte —
+      // justifie de vider le cache. Les autres events portent le même utilisateur :
+      // TOKEN_REFRESHED émis au retour sur l'onglet, USER_UPDATED, synchro entre onglets.
+      // Y vider le cache remettrait toutes les requêtes en chargement, et les écrans
+      // qui attendent leurs données pour s'afficher seraient démontés puis remontés,
+      // perdant au passage leur état local : dialogs ouverts, filtres, saisie en cours.
+      if (_event !== "INITIAL_SESSION" && currentUserIdRef.current !== nextUserId) {
         clearAllData();
       }
+      currentUserIdRef.current = nextUserId;
 
       if (newSession?.user) {
         setSession(newSession);
@@ -93,6 +105,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ client, children, na
       clearAllData();
 
       if (data.session && data.user) {
+        currentUserIdRef.current = data.user.id;
         setUser(enrichUserWithMetadata(data.user, data.session));
         setSession(data.session);
       }
@@ -156,6 +169,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ client, children, na
       setIsLoading(true);
 
       if (!session) {
+        currentUserIdRef.current = null;
         setUser(null);
         setSession(null);
         clearAllData();
@@ -174,6 +188,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ client, children, na
       navigate(getLoginUrl(redirectUrl));
       onSuccess?.("Déconnexion réussie");
     } catch {
+      currentUserIdRef.current = null;
       setUser(null);
       setSession(null);
       clearAllData();
