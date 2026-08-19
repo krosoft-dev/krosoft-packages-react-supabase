@@ -28,7 +28,7 @@
   },
   "peerDependencies": {
     "react": ">=19.2.8",
-    "@supabase/supabase-js": ">=2.112.2",
+    "@supabase/supabase-js": ">=2.112.3",
     "@tanstack/react-query": ">=5.101.4"
   },
   "dependencies": {
@@ -39,7 +39,7 @@
     "@krosoft/tooling-prettier": "^0.0.18",
     "@krosoft/tooling-tsconfig": "^0.0.7",
     "@krosoft/tooling-tsconfig-react": "^0.0.10",
-    "@supabase/supabase-js": "^2.112.2",
+    "@supabase/supabase-js": "^2.112.3",
     "@tanstack/react-query": "^5.101.4",
     "@types/react": "^19.2.18",
     "prettier": "^3.9.6",
